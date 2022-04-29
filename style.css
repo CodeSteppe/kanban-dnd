@@ -15,7 +15,7 @@ body {
 }
 
 .droppable {
-  background-color: #8fd2bf;
+  background: linear-gradient(45deg, #ff4137, #eaad32);
   padding: 0 1rem;
   flex: 1;
   border-radius: 0.5rem;
@@ -30,8 +30,8 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 8rem;
-  color: #e6530a;
-  background-color: #e1f6f1;
+  color: #e9550c;
+  background-color: rgba(240, 240, 240, 0.7);
 }
 
 .draggable.dragging {
