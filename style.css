@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Orbitron";
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  gap: 1rem;
+}
+
+.droppable {
+  background-color: #8fd2bf;
+  padding: 0 1rem;
+  flex: 1;
+  border-radius: 0.5rem;
+}
+
+.draggable {
+  padding: 1rem;
+  background-color: #fff;
+  margin: 1rem 0;
+  cursor: move;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  color: #e6530a;
+  background-color: #e1f6f1;
+}
+
+.draggable.dragging {
+  opacity: 0.5;
+}
