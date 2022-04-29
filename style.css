@@ -11,7 +11,7 @@ body {
   height: 100vh;
   overflow: hidden;
   display: flex;
-  gap: 1rem;
+  gap: 2px;
 }
 
 .droppable {
@@ -19,6 +19,7 @@ body {
   padding: 0 1rem;
   flex: 1;
   border-radius: 0.5rem;
+  overflow: auto;
 }
 
 .draggable {
