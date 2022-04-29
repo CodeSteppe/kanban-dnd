@@ -7,6 +7,18 @@
   font-family: "Orbitron";
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+}
+
 body {
   height: 100vh;
   overflow: hidden;
