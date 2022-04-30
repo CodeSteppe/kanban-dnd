@@ -12,11 +12,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c0c0c0;
+  background-color: #c0c0c0;
 }
 
 body {
@@ -27,17 +27,16 @@ body {
 }
 
 .droppable {
-  background: linear-gradient(45deg, #ff4137, #eaad32);
-  padding: 0 1rem;
   flex: 1;
+  padding: 0 1rem;
+  background: linear-gradient(45deg, #ff4137, #eaad32);
   border-radius: 0.5rem;
   overflow: auto;
 }
 
 .draggable {
-  padding: 1rem;
-  background-color: #fff;
   margin: 1rem 0;
+  padding: 1rem;
   cursor: move;
   display: flex;
   align-items: center;
@@ -47,6 +46,6 @@ body {
   background-color: rgba(240, 240, 240, 0.7);
 }
 
-.draggable.dragging {
+.dragging {
   opacity: 0.5;
 }
