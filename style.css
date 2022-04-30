@@ -26,6 +26,36 @@ body {
   gap: 2px;
 }
 
+h1 {
+  font-size: 20vh;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 8vh;
+  text-shadow: 0 0 20px #474747;
+}
+
+#dragged {
+  position: fixed;
+  left: 16vw;
+  bottom: 50vh;
+  width: 380px;
+  transform: scale(1.2);
+  background-color: rgba(240, 240, 240, 0.9);
+}
+
+#arrow {
+  position: fixed;
+  left: 30vw;
+  bottom: 30vh;
+  filter: drop-shadow(19px 8px 10px #fff);
+  width: 30vw;
+  transform: rotate(45deg);
+  z-index: 100;
+}
+
 .droppable {
   flex: 1;
   padding: 0 1rem;
