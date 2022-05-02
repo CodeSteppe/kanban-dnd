@@ -44,8 +44,22 @@ body {
   font-size: 8rem;
   color: #e9550c;
   background-color: rgba(240, 240, 240, 0.7);
+  transition: 0.3s;
 }
 
 .dragging {
   opacity: 0.5;
+}
+
+.new-added {
+  animation: insert 0.5s linear;
+}
+
+@keyframes insert {
+  from {
+    max-height: 0;
+  }
+  to {
+    max-height: 100vh;
+  }
 }

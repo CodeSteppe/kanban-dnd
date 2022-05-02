@@ -12,6 +12,7 @@ document.addEventListener('dragstart', e => {
 document.addEventListener('dragend', e => {
   if (e.target.classList.contains('draggable')) {
     e.target.classList.remove('dragging');
+    e.target.classList.remove('new-added');
   }
 });
 
@@ -23,9 +24,16 @@ droppables.forEach(droppable => {
     // droppable.append(dragging);
     const frontSib = getClosestFrontSibling(droppable, e.clientY);
     if (frontSib) {
+      if (frontSib.nextElementSibling === dragging) {
+        return;
+      }
       // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+      dragging.classList.add('new-added');
       frontSib.insertAdjacentElement('afterend', dragging);
     } else {
+      if (droppable.firstChild === dragging) {
+        return;
+      }
       // 前面没有元素了，放第一的位置
       droppable.prepend(dragging);
     }
