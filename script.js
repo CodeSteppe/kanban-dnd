@@ -52,7 +52,11 @@ droppables.forEach(droppable => {
       frontSib.insertAdjacentElement('afterend', cloned);
       handleDragEnd(dragging);
     } else {
-      if (droppable.firstChild === cloned) {
+      if (
+        droppable.firstChild === cloned ||
+        droppable.firstChild === dragging ||
+        dragging.parentNode === droppable
+      ) {
         return;
       }
       // 前面没有元素了，放第一的位置
