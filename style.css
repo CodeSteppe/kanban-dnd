@@ -56,11 +56,26 @@ body {
   animation: insert var(--transitionTime) linear;
 }
 
+.will-remove {
+  animation: remove var(--transitionTime) linear;
+  animation-fill-mode: forwards;
+}
+
 @keyframes insert {
   from {
     max-height: 0;
   }
   to {
     max-height: 100vh;
+  }
+}
+
+@keyframes remove {
+  from {
+    max-height: 100vh;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
   }
 }

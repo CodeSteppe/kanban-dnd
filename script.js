@@ -1,47 +1,64 @@
 const droppables = document.querySelectorAll('.droppable');
 const draggables = document.querySelectorAll('.draggable');
-const transitionTime = 1000;
+const transitionTime = 500;
+let dragging;
+let cloned;
 
 document.body.style.setProperty('--transitionTime', transitionTime + 'ms');
+
+function cleanClass(className) {
+  const elements = document.querySelectorAll(`.${className}`);
+  for (const el of elements) {
+    el.classList.remove(className);
+  }
+}
 
 // drag start
 document.addEventListener('dragstart', e => {
   if (e.target.classList.contains('draggable')) {
-    e.target.classList.add('dragging');
+    dragging = e.target;
+    dragging.classList.add('dragging');
+    cloned = dragging.cloneNode(true);
   }
 });
 
+function handleDragEnd() {
+  if (!dragging) return;
+  dragging.classList.add('will-remove');
+  setTimeout(() => {
+    dragging.remove();
+    cleanClass('dragging');
+  }, [transitionTime]);
+}
+
 // drag end
 document.addEventListener('dragend', e => {
-  if (e.target.classList.contains('draggable')) {
-    e.target.classList.remove('dragging');
-    setTimeout(() => {
-      e.target.classList.remove('new-added');
-    }, transitionTime);
-  }
+  cleanClass('dragging');
+  cleanClass('new-added');
 });
 
 // drag over
 droppables.forEach(droppable => {
   droppable.addEventListener('dragover', e => {
     e.preventDefault();
-    const dragging = document.querySelector('.dragging');
-    // droppable.append(dragging);
     const frontSib = getClosestFrontSibling(droppable, e.clientY);
+    const realFrontSib = dragging.previousElementSibling;
+    if (frontSib === realFrontSib) return;
     if (frontSib) {
-      if (frontSib.nextElementSibling === dragging) {
+      if (frontSib.nextElementSibling === cloned || frontSib === cloned) {
         return;
       }
-      dragging.classList.add('new-added');
-      // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
-      frontSib.insertAdjacentElement('afterend', dragging);
+      cloned.classList.add('new-added');
+      frontSib.insertAdjacentElement('afterend', cloned);
+      handleDragEnd(dragging);
     } else {
-      if (droppable.firstChild === dragging) {
+      if (droppable.firstChild === cloned) {
         return;
       }
-      dragging.classList.add('new-added');
       // 前面没有元素了，放第一的位置
-      droppable.prepend(dragging);
+      cloned.classList.add('new-added');
+      droppable.prepend(cloned);
+      handleDragEnd(dragging);
     }
   });
 });
