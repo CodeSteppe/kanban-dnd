@@ -16,6 +16,49 @@ document.addEventListener('dragend', e => {
   }
 });
 
+function removeAndAdd(dragging, handleAdd) {
+  let removed = false;
+  let added = false;
+  let clientHeight = dragging.clientHeight;
+  let removeHeight = clientHeight;
+  let addHeight = 0;
+  const stepHeight = 10;
+
+  function remove() {
+    if (removed) return;
+    if (removeHeight <= 0) {
+      dragging.style.maxHeight = 0 + 'px';
+      handleAdd();
+      removed = true;
+      return;
+    }
+    removeHeight -= stepHeight;
+    dragging.style.maxHeight = removeHeight + 'px';
+  }
+
+  function add() {
+    if (!removed) return;
+    if (addHeight >= clientHeight) {
+      added = true;
+      dragging.style.maxHeight = 100 + 'vh';
+      return;
+    }
+    addHeight += stepHeight;
+    dragging.style.maxHeight = addHeight + 'px';
+  }
+
+  function step() {
+    remove();
+    add();
+
+    if (!added) {
+      window.requestAnimationFrame(step);
+    }
+  }
+
+  window.requestAnimationFrame(step);
+}
+
 // drag over
 droppables.forEach(droppable => {
   droppable.addEventListener('dragover', e => {
@@ -24,18 +67,24 @@ droppables.forEach(droppable => {
     // droppable.append(dragging);
     const frontSib = getClosestFrontSibling(droppable, e.clientY);
     if (frontSib) {
-      if (frontSib.nextElementSibling === dragging) {
+      if (frontSib.nextElementSibling === dragging || dragging.classList.contains('will-remove')) {
         return;
       }
       // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
-      dragging.classList.add('new-added');
-      frontSib.insertAdjacentElement('afterend', dragging);
+      // dragging.classList.add('new-added');
+      // frontSib.insertAdjacentElement('afterend', dragging);
+      removeAndAdd(dragging, () => {
+        frontSib.insertAdjacentElement('afterend', dragging);
+      });
     } else {
       if (droppable.firstChild === dragging) {
         return;
       }
       // 前面没有元素了，放第一的位置
-      droppable.prepend(dragging);
+      // droppable.prepend(dragging);
+      removeAndAdd(dragging, () => {
+        droppable.prepend(dragging);
+      });
     }
   });
 });

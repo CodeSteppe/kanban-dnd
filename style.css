@@ -36,7 +36,8 @@ body {
 
 .draggable {
   margin: 1rem 0;
-  padding: 1rem;
+  line-height: 150%;
+  overflow: hidden;
   cursor: move;
   display: flex;
   align-items: center;
@@ -44,14 +45,19 @@ body {
   font-size: 8rem;
   color: #e9550c;
   background-color: rgba(240, 240, 240, 0.7);
-  transition: 0.3s;
+  /* transition: 0.3s; */
 }
 
 .dragging {
   opacity: 0.5;
+  overflow: hidden;
 }
 
 .new-added {
+  animation: insert 0.5s linear;
+}
+
+.will-remove {
   animation: insert 0.5s linear;
 }
 
@@ -61,5 +67,14 @@ body {
   }
   to {
     max-height: 100vh;
+  }
+}
+
+@keyframes remove {
+  from {
+    max-height: 100vh;
+  }
+  to {
+    max-height: 0;
   }
 }
