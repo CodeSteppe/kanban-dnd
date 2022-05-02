@@ -41,11 +41,16 @@ document.addEventListener('dragend', e => {
 droppables.forEach(droppable => {
   droppable.addEventListener('dragover', e => {
     e.preventDefault();
+    // 被移动到的column中，位置在dragging前面的最近的元素
     const frontSib = getClosestFrontSibling(droppable, e.clientY);
-    const realFrontSib = dragging.previousElementSibling;
-    if (frontSib === realFrontSib) return;
+    // dragging当前在DOM树中的前面的元素
+    const previousSib = dragging.previousElementSibling;
     if (frontSib) {
-      if (frontSib.nextElementSibling === cloned || frontSib === cloned) {
+      if (
+        frontSib.nextElementSibling === cloned ||
+        frontSib === cloned ||
+        frontSib === previousSib
+      ) {
         return;
       }
       cloned.classList.add('new-added');
