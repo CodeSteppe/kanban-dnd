@@ -59,9 +59,11 @@ droppables.forEach(droppable => {
     } else {
       if (
         droppable.firstChild === cloned ||
-        droppable.firstChild === dragging ||
-        dragging.parentNode === droppable
+        droppable.firstChild === dragging
       ) {
+        return;
+      }
+      if (dragging.parentNode === droppable && !previousSib) {
         return;
       }
       // 前面没有元素了，放第一的位置
