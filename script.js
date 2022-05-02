@@ -2,7 +2,7 @@ const droppables = document.querySelectorAll('.droppable');
 const draggables = document.querySelectorAll('.draggable');
 const transitionTime = 1000;
 
-document.documentElement.style.setProperty('--transitionTime', transitionTime + 'ms');
+document.body.style.setProperty('--transitionTime', transitionTime + 'ms');
 
 // drag start
 document.addEventListener('dragstart', e => {
@@ -32,8 +32,8 @@ droppables.forEach(droppable => {
       if (frontSib.nextElementSibling === dragging) {
         return;
       }
-      // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
       dragging.classList.add('new-added');
+      // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
       frontSib.insertAdjacentElement('afterend', dragging);
     } else {
       if (droppable.firstChild === dragging) {
