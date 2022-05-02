@@ -1,5 +1,8 @@
 const droppables = document.querySelectorAll('.droppable');
 const draggables = document.querySelectorAll('.draggable');
+const transitionTime = 1000;
+
+document.documentElement.style.setProperty('--transitionTime', transitionTime + 'ms');
 
 // drag start
 document.addEventListener('dragstart', e => {
@@ -12,7 +15,9 @@ document.addEventListener('dragstart', e => {
 document.addEventListener('dragend', e => {
   if (e.target.classList.contains('draggable')) {
     e.target.classList.remove('dragging');
-    e.target.classList.remove('new-added');
+    setTimeout(() => {
+      e.target.classList.remove('new-added');
+    }, transitionTime);
   }
 });
 

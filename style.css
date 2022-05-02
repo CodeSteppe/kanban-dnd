@@ -36,7 +36,8 @@ body {
 
 .draggable {
   margin: 1rem 0;
-  padding: 1rem;
+  line-height: 150%;
+  overflow: hidden;
   cursor: move;
   display: flex;
   align-items: center;
@@ -44,7 +45,7 @@ body {
   font-size: 8rem;
   color: #e9550c;
   background-color: rgba(240, 240, 240, 0.7);
-  transition: 0.3s;
+  transition: var(--transitionTime);
 }
 
 .dragging {
@@ -52,7 +53,7 @@ body {
 }
 
 .new-added {
-  animation: insert 0.5s linear;
+  animation: insert var(--transitionTime) linear;
 }
 
 @keyframes insert {
