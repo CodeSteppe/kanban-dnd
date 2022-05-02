@@ -34,6 +34,7 @@ droppables.forEach(droppable => {
       if (droppable.firstChild === dragging) {
         return;
       }
+      dragging.classList.add('new-added');
       // 前面没有元素了，放第一的位置
       droppable.prepend(dragging);
     }
